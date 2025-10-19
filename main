@@ -1,7 +1,5 @@
-local Module = loadstring(game:HttpGet("https://raw.githubusercontent.com/10memati/h1t0/refs/heads/main/gui"))()
+local H1T0 = loadstring(game:HttpGet("https://raw.githubusercontent.com/10memati/h1t0/refs/heads/main/gui"))()
 local notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/topraqk1/helixia-hub/refs/heads/main/Scripts/notification.lua"))()
-
-local H1T0 = Module:Create()
 
 H1T0:AddCommand({
     name = "Speed",
