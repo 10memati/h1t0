@@ -1,229 +1,222 @@
--- H1T0 Executor GUI
-local guiModule = {}
-
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 
-function guiModule:Create()
-    self.Commands = {}
+local H1T0 = {}
+H1T0.Commands = {}
 
-    local player = Players.LocalPlayer
-    local playerGui = player:WaitForChild("PlayerGui")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
 
-    local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.Name = "H1T0Commands"
-    ScreenGui.Parent = playerGui
-    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "H1T0Commands"
+ScreenGui.Parent = playerGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-    -- Main Frame
-    local Main = Instance.new("Frame")
-    Main.Name = "Main"
-    Main.AnchorPoint = Vector2.new(0.5,0.5)
-    Main.BackgroundColor3 = Color3.fromRGB(16,14,31)
-    Main.BorderSizePixel = 0
-    Main.Position = UDim2.new(0.5,0,0.5,0)
-    Main.Size = UDim2.new(0.285,0,0.64,0)
-    Main.Parent = ScreenGui
+local Main = Instance.new("Frame")
+Main.Name = "Main"
+Main.AnchorPoint = Vector2.new(0.5, 0.5)
+Main.BackgroundColor3 = Color3.fromRGB(16, 14, 31)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+Main.Size = UDim2.new(0.285, 0, 0.64, 0)
+Main.Parent = ScreenGui
 
-    local UICorner = Instance.new("UICorner")
-    UICorner.CornerRadius = UDim.new(0,12)
-    UICorner.Parent = Main
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 12)
+UICorner.Parent = Main
 
-    -- Title
-    local Title = Instance.new("TextLabel")
-    Title.Name = "Title"
-    Title.Parent = Main
-    Title.BackgroundTransparency = 1
-    Title.Position = UDim2.new(0.09,0,0,0)
-    Title.Size = UDim2.new(0.8,0,0.1,0)
-    Title.Font = Enum.Font.Ubuntu
-    Title.Text = "H1T0 Commands"
-    Title.TextColor3 = Color3.fromRGB(150,120,255)
-    Title.TextScaled = true
-    Title.TextWrapped = true
+local Title = Instance.new("TextLabel")
+Title.Name = "Title"
+Title.Parent = Main
+Title.BackgroundTransparency = 1
+Title.Position = UDim2.new(0.09, 0, 0, 0)
+Title.Size = UDim2.new(0.8, 0, 0.1, 0)
+Title.Font = Enum.Font.Ubuntu
+Title.Text = "H1T0 Commands"
+Title.TextColor3 = Color3.fromRGB(150, 120, 255)
+Title.TextScaled = true
+Title.TextWrapped = true
 
-    local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-    UITextSizeConstraint.MaxTextSize = 30
-    UITextSizeConstraint.Parent = Title
+local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+UITextSizeConstraint.MaxTextSize = 30
+UITextSizeConstraint.Parent = Title
 
-    -- Line
-    local Line = Instance.new("Frame")
-    Line.Name = "Line"
-    Line.Parent = Main
-    Line.BackgroundColor3 = Color3.fromRGB(150,160,145)
-    Line.Position = UDim2.new(0,0,0.108,0)
-    Line.Size = UDim2.new(0.996,0,0.0027,0)
+local Line = Instance.new("Frame")
+Line.Name = "Line"
+Line.Parent = Main
+Line.BackgroundColor3 = Color3.fromRGB(150, 160, 145)
+Line.Position = UDim2.new(0, 0, 0.108, 0)
+Line.Size = UDim2.new(0.996, 0, 0.0027, 0)
 
-    -- Search Frame
-    local SearchFrame = Instance.new("Frame")
-    SearchFrame.Name = "SearchFrame"
-    SearchFrame.Parent = Main
-    SearchFrame.BackgroundColor3 = Color3.fromRGB(17,11,27)
-    SearchFrame.BackgroundTransparency = 0.7
-    SearchFrame.Position = UDim2.new(0.05,0,0.16,0)
-    SearchFrame.Size = UDim2.new(0.9,0,0.095,0)
+local SearchFrame = Instance.new("Frame")
+SearchFrame.Name = "SearchFrame"
+SearchFrame.Parent = Main
+SearchFrame.BackgroundColor3 = Color3.fromRGB(17, 11, 27)
+SearchFrame.BackgroundTransparency = 0.7
+SearchFrame.Position = UDim2.new(0.05, 0, 0.16, 0)
+SearchFrame.Size = UDim2.new(0.9, 0, 0.095, 0)
 
-    local UICorner2 = Instance.new("UICorner")
-    UICorner2.Parent = SearchFrame
+local UICorner2 = Instance.new("UICorner")
+UICorner2.Parent = SearchFrame
 
-    local Search = Instance.new("TextBox")
-    Search.Name = "Search"
-    Search.Parent = SearchFrame
-    Search.BackgroundTransparency = 1
-    Search.Position = UDim2.new(0.02,0,0.08,0)
-    Search.Size = UDim2.new(0.96,0,0.82,0)
-    Search.PlaceholderText = "Search command..."
-    Search.Text = ""
-    Search.TextColor3 = Color3.new(1,1,1)
-    Search.Font = Enum.Font.Ubuntu
-    Search.TextScaled = true
-    Search.TextWrapped = true
-    Search.BorderSizePixel = 2
+local Search = Instance.new("TextBox")
+Search.Name = "Search"
+Search.Parent = SearchFrame
+Search.BackgroundTransparency = 1
+Search.Position = UDim2.new(0.02, 0, 0.08, 0)
+Search.Size = UDim2.new(0.96, 0, 0.82, 0)
+Search.PlaceholderText = "Search command..."
+Search.Text = ""
+Search.TextColor3 = Color3.new(1, 1, 1)
+Search.Font = Enum.Font.Ubuntu
+Search.TextScaled = true
+Search.TextWrapped = true
+Search.BorderSizePixel = 2
 
-    local UITextSizeConstraint2 = Instance.new("UITextSizeConstraint")
-    UITextSizeConstraint2.MaxTextSize = 18
-    UITextSizeConstraint2.Parent = Search
+local UITextSizeConstraint2 = Instance.new("UITextSizeConstraint")
+UITextSizeConstraint2.MaxTextSize = 18
+UITextSizeConstraint2.Parent = Search
 
-    -- CommandList
-    local CommandList = Instance.new("ScrollingFrame")
-    CommandList.Name = "CommandList"
-    CommandList.Parent = Main
-    CommandList.Active = true
-    CommandList.BackgroundTransparency = 1
-    CommandList.Position = UDim2.new(0.05,0,0.28,0)
-    CommandList.Size = UDim2.new(0.9,0,0.67,0)
+local CommandList = Instance.new("ScrollingFrame")
+CommandList.Name = "CommandList"
+CommandList.Parent = Main
+CommandList.Active = true
+CommandList.BackgroundTransparency = 1
+CommandList.Position = UDim2.new(0.05, 0, 0.28, 0)
+CommandList.Size = UDim2.new(0.9, 0, 0.67, 0)
 
-    local UIListLayout = Instance.new("UIListLayout")
-    UIListLayout.Parent = CommandList
-    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-    UIListLayout.Padding = UDim.new(0,5)
+local UIListLayout = Instance.new("UIListLayout")
+UIListLayout.Parent = CommandList
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 5)
 
-    -- Menu Toggle
-    local MenuToggle = Instance.new("TextButton")
-    MenuToggle.Name = "MenuToggle"
-    MenuToggle.Parent = ScreenGui
-    MenuToggle.AnchorPoint = Vector2.new(0,0.5)
-    MenuToggle.BackgroundColor3 = Color3.new(0.0627,0.0549,0.1215)
-    MenuToggle.BorderSizePixel = 0
-    MenuToggle.Position = UDim2.new(0,10,0.5,0)
-    MenuToggle.Size = UDim2.new(0,50,0,50)
-    MenuToggle.Font = Enum.Font.FredokaOne
-    MenuToggle.Text = "H"
-    MenuToggle.TextColor3 = Color3.new(1,1,1)
-    MenuToggle.TextScaled = true
+local MenuToggle = Instance.new("TextButton")
+MenuToggle.Name = "MenuToggle"
+MenuToggle.Parent = ScreenGui
+MenuToggle.AnchorPoint = Vector2.new(0, 0.5)
+MenuToggle.BackgroundColor3 = Color3.new(0.0627, 0.0549, 0.1215)
+MenuToggle.BorderSizePixel = 0
+MenuToggle.Position = UDim2.new(0, 10, 0.5, 0)
+MenuToggle.Size = UDim2.new(0, 50, 0, 50)
+MenuToggle.Font = Enum.Font.FredokaOne
+MenuToggle.Text = "H"
+MenuToggle.TextColor3 = Color3.new(1, 1, 1)
+MenuToggle.TextScaled = true
 
-    local UICorner4 = Instance.new("UICorner")
-    UICorner4.CornerRadius = UDim.new(0,12)
-    UICorner4.Parent = MenuToggle
+local UICorner4 = Instance.new("UICorner")
+UICorner4.CornerRadius = UDim.new(0, 12)
+UICorner4.Parent = MenuToggle
 
-    MenuToggle.MouseButton1Click:Connect(function()
-        Main.Visible = not Main.Visible
-    end)
+MenuToggle.MouseButton1Click:Connect(function()
+    Main.Visible = not Main.Visible
+end)
 
-    -- Dragging
-    local dragging, dragInput, dragStart, startPos = false, nil, nil, nil
-    local function update(input)
-        local delta = input.Position - dragStart
-        Main.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    end
-
-    Main.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            dragging = true
-            dragStart = input.Position
-            startPos = Main.Position
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragging = false
-                end
-            end)
-        end
-    end)
-
-    Main.InputChanged:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-            dragInput = input
-        end
-    end)
-
-    UserInputService.InputChanged:Connect(function(input)
-        if input == dragInput and dragging then
-            update(input)
-        end
-    end)
-
-    -- Search function
-    local function filterCommands()
-        local text = Search.Text:lower()
-        for _, cmd in pairs(CommandList:GetChildren()) do
-            if cmd:IsA("Frame") then
-                local nameLabel = cmd:FindFirstChild("CommandName")
-                local usageLabel = cmd:FindFirstChild("CommandUsage")
-                if nameLabel and usageLabel then
-                    local cmdText = nameLabel.Text:lower()
-                    local usageText = usageLabel.Text:lower()
-                    cmd.Visible = (text == "" or cmdText:find(text) or usageText:find(text))
-                end
-            end
-        end
-    end
-
-    Search:GetPropertyChangedSignal("Text"):Connect(filterCommands)
-
-    -- AddCommand
-    function guiModule:AddCommand(data)
-        local cmdTemplate = Instance.new("Frame")
-        cmdTemplate.BackgroundColor3 = Color3.fromRGB(25,25,25)
-        cmdTemplate.Size = UDim2.new(1, 0, 0, 50)
-        cmdTemplate.BackgroundTransparency = 0.1
-        cmdTemplate.BorderSizePixel = 0
-        cmdTemplate.Parent = CommandList
-
-        local UICornerCmd = Instance.new("UICorner")
-        UICornerCmd.CornerRadius = UDim.new(0,8)
-        UICornerCmd.Parent = cmdTemplate
-
-        local CommandName = Instance.new("TextLabel")
-        CommandName.Name = "CommandName"
-        CommandName.Text = data.name
-        CommandName.TextColor3 = Color3.fromRGB(62, 195, 197)
-        CommandName.Font = Enum.Font.Ubuntu
-        CommandName.TextScaled = true
-        CommandName.TextXAlignment = Enum.TextXAlignment.Left
-        CommandName.BackgroundTransparency = 1
-        CommandName.Size = UDim2.new(0.365,0,1,0)
-        CommandName.Position = UDim2.new(0.046,0,0,0)
-        CommandName.Parent = cmdTemplate
-
-        local CommandUsage = Instance.new("TextLabel")
-        CommandUsage.Name = "CommandUsage"
-        CommandUsage.Text = data.usage
-        CommandUsage.TextColor3 = Color3.fromRGB(200,200,200)
-        CommandUsage.Font = Enum.Font.Ubuntu
-        CommandUsage.TextScaled = true
-        CommandUsage.TextXAlignment = Enum.TextXAlignment.Left
-        CommandUsage.BackgroundTransparency = 1
-        CommandUsage.Position = UDim2.new(0.42,0,0.33,0)
-        CommandUsage.Size = UDim2.new(0.55,0,0.6,0)
-        CommandUsage.Parent = cmdTemplate
-
-        table.insert(self.Commands, data)
-    end
-
-    -- Chat commands
-    player.Chatted:Connect(function(msg)
-        for _, cmd in pairs(guiModule.Commands) do
-            local cmdName = cmd.usage:match("^:[^%s]+")
-            if cmdName and msg:lower():sub(1,#cmdName) == cmdName:lower() then
-                local args = msg:sub(#cmdName + 2)
-                if cmd.callback then
-                    cmd.callback(args)
-                end
-            end
-        end
-    end)
-
-    return guiModule
+-- Dragging
+local dragging, dragInput, dragStart, startPos = false, nil, nil, nil
+local function update(input)
+    local delta = input.Position - dragStart
+    Main.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale,
+        startPos.Y.Offset + delta.Y)
 end
+
+Main.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = Main.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+Main.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+-- Search function
+local function filterCommands()
+    local text = Search.Text:lower()
+    for _, cmd in pairs(CommandList:GetChildren()) do
+        if cmd:IsA("Frame") then
+            local nameLabel = cmd:FindFirstChild("CommandName")
+            local usageLabel = cmd:FindFirstChild("CommandUsage")
+            if nameLabel and usageLabel then
+                local cmdText = nameLabel.Text:lower()
+                local usageText = usageLabel.Text:lower()
+                cmd.Visible = (text == "" or cmdText:find(text) or usageText:find(text))
+            end
+        end
+    end
+end
+
+Search:GetPropertyChangedSignal("Text"):Connect(filterCommands)
+
+-- AddCommand
+function H1T0:AddCommand(data)
+    local cmdTemplate = Instance.new("TextButton")
+    cmdTemplate.Size = UDim2.new(1, 0, 0, 50)
+    cmdTemplate.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    cmdTemplate.BackgroundTransparency = 0.1
+    cmdTemplate.BorderSizePixel = 0
+    cmdTemplate.Parent = CommandList
+
+    local UICornerCmd = Instance.new("UICorner")
+    UICornerCmd.CornerRadius = UDim.new(0, 8)
+    UICornerCmd.Parent = cmdTemplate
+
+    local CommandName = Instance.new("TextLabel")
+    CommandName.Text = data.name
+    CommandName.TextColor3 = Color3.fromRGB(62, 195, 197)
+    CommandName.Font = Enum.Font.Ubuntu
+    CommandName.TextScaled = true
+    CommandName.TextXAlignment = Enum.TextXAlignment.Left
+    CommandName.BackgroundTransparency = 1
+    CommandName.Size = UDim2.new(0.35, 0, 1, 0)
+    CommandName.Position = UDim2.new(0.05, 0, 0, 0)
+    CommandName.Parent = cmdTemplate
+
+    local CommandUsage = Instance.new("TextLabel")
+    CommandUsage.Text = data.usage
+    CommandUsage.TextColor3 = Color3.fromRGB(200, 200, 200)
+    CommandUsage.Font = Enum.Font.Ubuntu
+    CommandUsage.TextScaled = true
+    CommandUsage.TextXAlignment = Enum.TextXAlignment.Left
+    CommandUsage.BackgroundTransparency = 1
+    CommandUsage.Position = UDim2.new(0.42, 0, 0.33, 0)
+    CommandUsage.Size = UDim2.new(0.55, 0, 0.6, 0)
+    CommandUsage.Parent = cmdTemplate
+
+    cmdTemplate.MouseButton1Click:Connect(function()
+        if data.callback then
+            data.callback()
+        end
+    end)
+
+    table.insert(self.Commands, data)
+end
+
+-- Chat commands
+player.Chatted:Connect(function(msg)
+    for _, cmd in pairs(guiModule.Commands) do
+        local cmdName = cmd.usage:match("^:[^%s]+")
+        if cmdName and msg:lower():sub(1, #cmdName) == cmdName:lower() then
+            local args = msg:sub(#cmdName + 2)
+            if cmd.callback then
+                cmd.callback(args)
+            end
+        end
+    end
+end)
 
 return guiModule
