@@ -1,0 +1,2 @@
+local H1T0 = loadstring(game:HttpGet(""))()
+
