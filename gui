@@ -1,3 +1,4 @@
+-- H1T0 Executor GUI
 local guiModule = {}
 
 local Players = game:GetService("Players")
@@ -6,9 +7,12 @@ local UserInputService = game:GetService("UserInputService")
 function guiModule:Create()
     self.Commands = {}
 
+    local player = Players.LocalPlayer
+    local playerGui = player:WaitForChild("PlayerGui")
+
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = "H1T0Commands"
-    ScreenGui.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
+    ScreenGui.Parent = playerGui
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
     -- Main Frame
@@ -32,7 +36,7 @@ function guiModule:Create()
     Title.BackgroundTransparency = 1
     Title.Position = UDim2.new(0.09,0,0,0)
     Title.Size = UDim2.new(0.8,0,0.1,0)
-    Title.Font = Enum.Font.Unknown
+    Title.Font = Enum.Font.Ubuntu
     Title.Text = "H1T0 Commands"
     Title.TextColor3 = Color3.fromRGB(150,120,255)
     Title.TextScaled = true
@@ -166,7 +170,7 @@ function guiModule:Create()
 
     Search:GetPropertyChangedSignal("Text"):Connect(filterCommands)
 
-    -- AddCommand function
+    -- AddCommand
     function guiModule:AddCommand(data)
         local cmdTemplate = Instance.new("Frame")
         cmdTemplate.BackgroundColor3 = Color3.fromRGB(25,25,25)
@@ -207,7 +211,6 @@ function guiModule:Create()
     end
 
     -- Chat commands
-    local player = Players.LocalPlayer
     player.Chatted:Connect(function(msg)
         for _, cmd in pairs(guiModule.Commands) do
             local cmdName = cmd.usage:match("^:[^%s]+")
