@@ -1,2 +1,45 @@
-local H1T0 = loadstring(game:HttpGet(""))()
+local H1T0 = loadstring(game:HttpGet("https://raw.githubusercontent.com/10memati/h1t0/refs/heads/main/gui"))()
+local notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/topraqk1/helixia-hub/refs/heads/main/Scripts/notification.lua"))()
 
+H1T0:AddCommand({
+    name = "Speed",
+    usage = ":speed [Number]",
+    callback = function(arg)
+        local speed = tonumber(arg)
+        if speed then
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speed
+            notify({Title = "H1T0", Text = "WalkSpeed set to "..speed, Duration = 3})
+        else
+            notify({Title = "H1T0", Text = "Invalid speed value!", Duration = 3})
+        end
+    end
+})
+
+H1T0:AddCommand({
+    name = "Jump Power",
+    usage = ":jumppower [Number]",
+    callback = function(arg)
+        local jump = tonumber(arg)
+        if jump then
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = jump
+            notify({Title = "H1T0", Text = "JumpPower set to "..jump, Duration = 3})
+        else
+            notify({Title = "H1T0", Text = "Invalid jump power!", Duration = 3})
+        end
+    end
+})
+
+H1T0:AddCommand({
+    name = "To",
+    usage = ":to [PlayerName]",
+    callback = function(arg)
+        local targetPlayer = game.Players:FindFirstChild(arg)
+        local localPlayer = game.Players.LocalPlayer
+        if targetPlayer and localPlayer.Character and targetPlayer.Character then
+            localPlayer.Character:MoveTo(targetPlayer.Character.HumanoidRootPart.Position)
+            notify({Title = "H1T0", Text = "Teleported to "..targetPlayer.Name, Duration = 3})
+        else
+            notify({Title = "H1T0", Text = "Player not found!", Duration = 3})
+        end
+    end
+})
